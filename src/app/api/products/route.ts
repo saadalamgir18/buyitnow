@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import productModel from "../../../../db/connectDB";
 import { productSchema } from "@/store/types/types";
-
+import ApiFilters from "@/utils/ApiFilters";
 export async function POST(req: NextRequest) {
   const data = await req.json();
   console.log(data);
@@ -23,9 +23,25 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-  const products = await productModel.find();
+  const resPerPage = 3;
+  const productsCount = await productModel.countDocuments();
+  const apiFilters = new ApiFilters(
+    productModel.find(),
+    req.nextUrl.searchParams
+  )
+    .Search()
+    .filter();
+  let products = await apiFilters.query;
+  const filterProductsCount = products.length;
+  apiFilters.paginations(resPerPage);
+  products = await apiFilters.query.clone();
+
+  // const products = await productModel.find();
 
   return NextResponse.json({
+    productsCount,
+    resPerPage,
+    filterProductsCount,
     products,
   });
 }
