@@ -36,7 +36,7 @@ class ApiFilters {
         output[key] = queryCopy[key];
       } else {
         prop = key.split("[")[0];
-        console.log("prop", prop);
+
         let operator = key.match(/\[(.*)\]/)[1];
 
         if (!output[prop]) {
@@ -45,7 +45,6 @@ class ApiFilters {
         output[prop][`$${operator}`] = queryCopy[key];
       }
     }
-    console.log("output: ", output);
 
     this.query = this.query.find(output);
     return this;

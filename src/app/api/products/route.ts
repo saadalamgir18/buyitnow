@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-  const resPerPage = 3;
+  const resPerPage = 2;
   const productsCount = await productModel.countDocuments();
   const apiFilters = new ApiFilters(
     productModel.find(),
