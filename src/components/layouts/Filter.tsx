@@ -26,6 +26,8 @@ const Filters = () => {
     if (checkbox.checked === false) {
       // Delete the filter from query
       queryParams.delete(checkbox.name);
+      // const path = window.location.pathname + "?" + queryParams.toString();
+      // router.push(path);
     } else {
       // Set filter in the query
       if (queryParams.has(checkbox.name)) {

@@ -36,8 +36,6 @@ export async function GET(req: NextRequest) {
   apiFilters.paginations(resPerPage);
   products = await apiFilters.query.clone();
 
-  // const products = await productModel.find();
-
   return NextResponse.json({
     productsCount,
     resPerPage,

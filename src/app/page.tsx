@@ -11,14 +11,32 @@ import { useSearchParams } from "next/navigation";
 export default function Home() {
   const searchParams = useSearchParams();
   const [productsData, setProducts] = useState([]);
-  console.log("URLSearchParams", searchParams.get("keyword"));
-  const urlParams = {
-    keyword: searchParams.get("keyword"),
-    page: searchParams.get("page"),
-  };
-  const searchQuery = queryString.stringify(urlParams);
 
   useEffect(() => {
+    // const urlParams = {
+    //   keyword: searchParams.get("keyword"),
+    //   page: searchParams.get("page"),
+    //   category: searchParams.get("category"),
+    //   "ratings[gte]": searchParams.get("ratings"),
+    //   "price[gte]": searchParams.get("min"),
+    //   "price[lte]": searchParams.get("max"),
+    // };
+    const urlParams = {
+      keyword: searchParams.get("keyword"),
+      page: searchParams.get("page"),
+      ...(searchParams.get("category") && {
+        category: searchParams.get("category"),
+      }),
+      ...(searchParams.get("ratings") && {
+        "ratings[gte]": searchParams.get("ratings"),
+      }), // Include only if ratings is present
+      ...(searchParams.get("min") && { "price[gte]": searchParams.get("min") }), // Include only if min is present
+      ...(searchParams.get("max") && { "price[lte]": searchParams.get("max") }), // Include only if max is present
+    };
+    const filter_urlParams = Object.fromEntries(
+      Object.entries(urlParams).filter(([key, value]) => value !== undefined)
+    );
+    const searchQuery = queryString.stringify(filter_urlParams);
     console.log("searchQuery: ", searchQuery);
     let config = {
       method: "get",
@@ -35,7 +53,7 @@ export default function Home() {
       .catch((error) => {
         console.log(error);
       });
-  }, [searchQuery]);
+  }, [searchParams]);
 
   // const productsData = await getData();
   return <ListProducts productsData={productsData} />;

@@ -25,6 +25,7 @@ class ApiFilters {
     for (const [key, value] of urlParams.entries()) {
       queryCopy[key] = value;
     }
+    console.log("queryCopy", queryCopy);
 
     const removeFeilds = ["keyword", "page"];
     removeFeilds.forEach((el) => delete queryCopy[el]);
@@ -45,6 +46,7 @@ class ApiFilters {
         output[prop][`$${operator}`] = queryCopy[key];
       }
     }
+    console.log("output", output);
 
     this.query = this.query.find(output);
     return this;

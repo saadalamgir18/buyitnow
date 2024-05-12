@@ -1,10 +1,26 @@
 "use client";
 import Image from "next/image";
-import React, { useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import StarRatings from "react-star-ratings";
 import BreadCrumbs from "../layouts/BreadCrumbs";
 import { Product } from "../../../db/connectDB";
+import { useRecoilState } from "recoil";
+import CartContext from "@/context/CartContext";
+// import { cartAtom } from "@/store/atoms/cart";
+// import { addCartItems, cartAtom } from "@/store/atoms/cart";
 function ProductDetails({ product }: { product: Product }) {
+  const { addItemToCart } = useContext(CartContext);
+  const addToCartHandler = () => {
+    addItemToCart({
+      product: product._id,
+      name: product.name,
+      price: product.price,
+      image: product.images[0].url,
+      stock: product.stock,
+      seller: product.seller,
+    });
+  };
+
   const imgRef = useRef(product.images[0].url);
   const setImagePreview = (url: string) => {
     imgRef.current.src = url;
@@ -90,7 +106,10 @@ function ProductDetails({ product }: { product: Product }) {
               <p className="mb-4 text-gray-500">{product.description}</p>
 
               <div className="flex flex-wrap gap-2 mb-5">
-                <button className="px-4 py-2 inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700">
+                <button
+                  className="px-4 py-2 inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
+                  onClick={addToCartHandler}
+                >
                   <i className="fa fa-shopping-cart mr-2"></i>
                   Add to cart
                 </button>

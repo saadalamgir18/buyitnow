@@ -18,6 +18,7 @@
     "react-dom": "^18",
     "react-js-pagination": "^3.0.2",
     "react-star-ratings": "^2.3.0",
+    "recoil": "^0.7.7",
     "zod": "^3.23.7"
   },
   "devDependencies": {
