@@ -10,14 +10,18 @@
   },
   "dependencies": {
     "@next/env": "^14.2.3",
+    "@types/bcryptjs": "^2.4.6",
     "axios": "^1.6.8",
+    "bcryptjs": "^2.4.3",
     "mongoose": "^8.3.4",
     "next": "14.2.3",
+    "next-auth": "^4.24.7",
     "query-string": "^9.0.0",
     "react": "^18",
     "react-dom": "^18",
     "react-js-pagination": "^3.0.2",
     "react-star-ratings": "^2.3.0",
+    "react-toastify": "^10.0.5",
     "recoil": "^0.7.7",
     "zod": "^3.23.7"
   },

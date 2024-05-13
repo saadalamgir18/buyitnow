@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layouts/Header";
 import { GlobalProvider } from "./GlobalProvider";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <GlobalProvider>
           <Header />
+          <ToastContainer position="top-right" />
           {children}
         </GlobalProvider>
       </body>
