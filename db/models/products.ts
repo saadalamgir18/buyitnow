@@ -1,14 +1,5 @@
 import { InferSchemaType, Schema, model } from "mongoose";
 import mongoose from "mongoose";
-import "./envConfig.ts";
-
-// mongoose.connect(process.env.DATABASE_URL);
-mongoose.connect(
-  "mongodb+srv://saadalamgir18:x9K1XLrpMsXwwth2@cluster0.vqpdxmb.mongodb.net/buyitnow"
-);
-
-console.log("dburl", process.env.DATABASE_URL);
-// "mongodb+srv://saadalamgir18:x9K1XLrpMsXwwth2@cluster0.vqpdxmb.mongodb.net/buyitnow"
 
 const productSchema = new Schema({
   name: {

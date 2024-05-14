@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import User from "../../../../../db/user";
+import User from "../../../../../db/models/user";
+import dbConnect from "../../../../../db/config/dbConnect";
 import bcrypt from "bcryptjs";
+dbConnect();
 // import
 type CredentialType = {
   email: string;

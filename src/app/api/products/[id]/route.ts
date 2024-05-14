@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import productModel from "../../../../../db/connectDB";
-
+import productModel from "../../../../../db/models/products";
+import dbConnect from "../../../../../db/config/dbConnect";
+dbConnect();
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }

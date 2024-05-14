@@ -1,8 +1,5 @@
 import mongoose, { InferSchemaType } from "mongoose";
 import bcrypt from "bcryptjs";
-mongoose.connect(
-  "mongodb+srv://saadalamgir18:x9K1XLrpMsXwwth2@cluster0.vqpdxmb.mongodb.net/buyitnow"
-);
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,

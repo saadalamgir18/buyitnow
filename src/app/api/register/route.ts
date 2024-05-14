@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import User from "../../../../db/user";
+import User from "../../../../db/models/user";
 import { UserZodSchema } from "@/store/types/types";
+import dbConnect from "../../../../db/config/dbConnect";
 
+dbConnect();
 export async function POST(request: NextRequest) {
   const data = await request.json();
   const { success } = UserZodSchema.safeParse(data);

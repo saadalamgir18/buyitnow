@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useContext, useEffect, useRef } from "react";
 import StarRatings from "react-star-ratings";
 import BreadCrumbs from "../layouts/BreadCrumbs";
-import { Product } from "../../../db/connectDB";
+import { Product } from "../../../db/models/products";
 import { useRecoilState } from "recoil";
 import CartContext from "@/context/CartContext";
 // import { cartAtom } from "@/store/atoms/cart";

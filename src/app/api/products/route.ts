@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import productModel from "../../../../db/connectDB";
+import productModel from "../../../../db/models/products";
 import { productSchema } from "@/store/types/types";
 import ApiFilters from "@/utils/ApiFilters";
+import dbConnect from "../../../../db/config/dbConnect";
+dbConnect();
 export async function POST(req: NextRequest) {
   const data = await req.json();
   console.log(data);

@@ -3,6 +3,9 @@ const nextConfig = {
     images:{
         domains:['res.cloudinary.com']
     },
+    env:{
+        MONGODB_URL: process.env.MONGODB_URL
+    }
 
 };
 

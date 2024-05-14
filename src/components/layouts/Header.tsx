@@ -9,7 +9,6 @@ import { useSession } from "next-auth/react";
 const Header = () => {
   const { cart } = useContext(CartContext);
   const { data } = useSession();
-  console.log(data?.user);
 
   const cartItems = cart?.cartItems;
   return (
