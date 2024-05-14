@@ -29,7 +29,7 @@ const Register = () => {
           method: "POST",
         }
       );
-      console.log(data.status);
+
       if (data?.status === 400) {
         toast.warning(data.message);
       } else if (data?.status === 403) {

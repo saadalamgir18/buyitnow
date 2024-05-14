@@ -6,7 +6,7 @@ import React from "react";
 
 const Sidebar = () => {
   const logoutHandler = () => {
-    signOut();
+    signOut({ callbackUrl: "http://localhost:3000/login" });
   };
 
   return (
@@ -95,12 +95,12 @@ const Sidebar = () => {
 
         <li>
           {" "}
-          <a
+          <button
             className="block px-3 py-2 text-red-800 hover:bg-red-100 hover:text-white-500 rounded-md cursor-pointer"
             onClick={logoutHandler}
           >
             Logout
-          </a>
+          </button>
         </li>
       </ul>
     </aside>

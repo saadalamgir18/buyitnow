@@ -31,7 +31,7 @@ const Profile = () => {
           <h5 className="font-semibold text-lg">{data?.user?.name}</h5>
           <p>
             <b>Email:</b> {data?.user?.email} | <b>Joined On:</b>
-            {/* {data?.user?.createdAt} */}
+            {data?.user?.createdAt?.substring(0, 10)}
           </p>
         </figcaption>
       </figure>

@@ -4,6 +4,10 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import User from "../../../../../db/user";
 import bcrypt from "bcryptjs";
 // import
+type CredentialType = {
+  email: string;
+  password: string;
+};
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
@@ -20,32 +24,39 @@ const handler = NextAuth({
           placeholder: "password",
         },
       },
-      async authorize(
-        credentials: Record<"email" | "password", string> | undefined,
-        request
-      ) {
-        console.log(credentials?.email);
-        const user_password: string = credentials?.password;
-        const user_email = credentials?.email;
-        const { password, email, name, avatar } = await User.findOne({
-          email: user_email,
-        }).select("+password");
-        const user = { email, name, avatar };
-        console.log(user);
-        if (!email) {
-          //   throw new Error("Invalid email or password");
-          return null;
+      async authorize(credentials?: CredentialType) {
+        if (credentials) {
+          const user = await User.findOne({
+            email: credentials.email,
+          }).select("+password");
+
+          if (!user) {
+            //   throw new Error("Invalid email or password");
+            return null;
+          }
+          const isPasswordMatched = await bcrypt.compare(
+            credentials.password,
+            user.password
+          );
+          if (!isPasswordMatched) {
+            return null;
+          }
+          return user;
         }
-        console.log(email);
-        const isPasswordMatched = await bcrypt.compare(user_password, password);
-        if (!isPasswordMatched) {
-          throw new Error("Invalid email or password");
-          return null;
-        }
-        return user;
       },
     }),
   ],
+  callbacks: {
+    jwt: async ({ token, user }) => {
+      user && (token.user = user);
+      return token;
+    },
+    session: async ({ session, token }) => {
+      session.user = token.user;
+      delete session?.user?.password;
+      return session;
+    },
+  },
   pages: {
     signIn: "/signin",
   },
