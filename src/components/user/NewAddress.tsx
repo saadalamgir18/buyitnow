@@ -1,12 +1,9 @@
 "use client";
 import React, { useState } from "react";
-
 import Sidebar from "../layouts/Sidebar";
-
 import { countries } from "countries-list";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-
 const NewAddress = () => {
   const countriesList = Object.values(countries);
   const [street, setStreet] = useState("");

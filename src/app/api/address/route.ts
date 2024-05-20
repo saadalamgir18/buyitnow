@@ -6,6 +6,8 @@ dbConnect();
 
 export async function POST(req: NextRequest) {
   const data = await req.json();
+  const userId = req.headers.get("userid");
+  data.user = userId;
   const { success } = AddressZodSchema.safeParse(data);
 
   if (!success) {
@@ -22,7 +24,9 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
-  const address = await Address.find();
+  const userId = req.headers.get("userid");
+
+  const address = await Address.find({ user: userId });
   return NextResponse.json({
     address,
   });

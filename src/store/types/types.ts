@@ -24,4 +24,5 @@ export const AddressZodSchema = zod.object({
   phoneNo: zod.string(),
   zipCode: zod.string(),
   country: zod.string(),
+  user: zod.string(),
 });
